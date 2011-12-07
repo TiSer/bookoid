@@ -1,0 +1,7 @@
+  <div align="left">
+     <% if user_signed_in? %>
+		   You entered as <b><%= current_user.email %></b>. <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+	    <% else %>
+		   <%= link_to "Log in", new_user_session_path %> | <%= link_to "Registration", new_user_registration_path %>
+	   <% end %>
+  </div>

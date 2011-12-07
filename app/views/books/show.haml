@@ -1,0 +1,21 @@
+=image_tag(@book.cover, :align => 'left', :border => "2")
+
+%div.bookshow
+  Title:
+  =@book.title
+
+  %br/
+  Author:
+  = @book.author
+
+  %br/
+  Year:
+  = @book.year == nil ? 'unknown' : @book.year
+
+  %br/
+  Genre:
+  = @book.genre.title
+
+  %br/
+  Description:
+  = @book.description

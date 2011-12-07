@@ -1,0 +1,12 @@
+%h3= link_to 'Add genre', new_genre_path
+
+%table{:cellpadding=>5,:cellspacing=>5}
+  %tr
+    %th Title
+
+    - @genres.each do |genre|
+      = form_for genre do |f|
+        %tr
+        %td= f.text_field :title, :value => genre.title
+        %td= link_to "Edit", edit_genre_path(genre)
+        %td= link_to 'Delete', genre_path(genre), :confirm => 'Delete genre?', :method => :delete

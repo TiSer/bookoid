@@ -1,0 +1,31 @@
+%h2 Add book
+%br
+
+  = f.label :book_title
+  = f.text_field :title,:size => 70
+
+  %br
+  %br
+  = f.label :author
+  = f.text_field :author
+
+  = f.label :year
+  = f.date_select :year, :order => [:year], :start_year => 1, :prompt => { :year => '' }
+
+  = f.label :genre
+  = f.select :genre_id, @genres
+
+
+  %br
+  %br
+  = f.label :description
+  %p= f.text_area :description
+
+  = f.label :cover
+  = f.file_field :cover
+
+  %br
+  %br
+  = f.submit "OK"
+  |
+  = link_to "Back", books_path
