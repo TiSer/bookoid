@@ -3,14 +3,16 @@
 %br/
 =will_paginate @books
 
-%table{:cellpadding=>5,:cellspacing=>5}
+%br/
+%table.round{:cellpadding=>5,:cellspacing=>5}
   %tr
     %th
 
     - @books.each do |book|
-      %tr
+      %tr#book
       %td= link_to image_tag(book.cover(:thumb), :border => "1"), book_path(book)
       %td= book.title
       %td= link_to("Delete from my list", drop_book_path(book))
 
+%br/
 =will_paginate @books

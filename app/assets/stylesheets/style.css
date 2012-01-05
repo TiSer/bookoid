@@ -1,4 +1,42 @@
+body {background:#F8F8FF;}
+a:link { color: blue; text-decoration:underline;}
+a:visited {color:blue}
+img {border-color:black;}
 
 .bookshow { font-size: 18px; line-height:2em; position:relative; left: 10px;}
 
 
+
+#book_list table {
+        /*border-collapse: collapse;*/
+}
+#book_list table tr td {
+        padding: 5px;
+        vertical-align: top;
+}
+
+#book_list .list_actions {
+  font-size:    small;
+  text-align:   right;
+  padding-left: 1em;
+}
+
+#book_list .list_line_even {
+  background:   #E8E8E8;
+}
+#book_list .list_line_odd {
+  background:   #E0E0E0;
+}
+
+
+
+
+ /*---  decorations  ---*/
+
+.round {
+        -moz-border-radius:    10px;
+        -webkit-border-radius: 10px;
+        border-radius:         10px;
+        }
+
+table { border:1px solid; }

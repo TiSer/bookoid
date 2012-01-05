@@ -1,2 +1,6 @@
+%h2 Add book
+
+= render :partial => "shared/errors", :locals => {:obj => @book}
+
 = form_for @book do |f|
   = render :partial => "form", :locals => {:f => f, :action => "new"}

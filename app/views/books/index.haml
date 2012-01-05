@@ -1,30 +1,37 @@
 %br/
 
-= form_tag books_path, :method => 'get' do
-  = label_tag :find_book
-  =# text_field_tag :search, params[:search]
-  = autocomplete_field_tag 'search', '', autocomplete_book_title_books_path, :size => 35#, :"data-delimiter" => ',' # 'search'  is using like params[:search]
-  = submit_tag "Search", :name => nil
-  =# text_field_tag 'title', '', :autocomplete => books_autocomplete_book_title_path
+%div#book_list
+  = form_tag books_path, :autocomplete => 'off', :method => 'get' do  #autocomplete 'off' is just for browser autocomplete
+    = label_tag :find_book_by_title
+    =# text_field_tag :search, params[:search]
+    = autocomplete_field_tag 'search', '', autocomplete_book_title_books_path, :size => 35#, :"data-delimiter" => ',' # 'search'  is using like params[:search]
+    = submit_tag "Search", :name => nil
+    =# text_field_tag 'title', '', :autocomplete => books_autocomplete_book_title_path
 
-%br
-or
+  %br
+  or
 
-%h3= link_to 'Add book', new_book_path
+  %h3= link_to 'Add book', new_book_path
 
-%br/
-=will_paginate @books
+  %br/
+  =will_paginate @books
 
-%table{:cellpadding=>5,:cellspacing=>5}
-  %tr
-    %th Title
+  %table.round{:cellpadding=>5,:cellspacing=>5}
+    %tr
+      %th
 
-    - @books.each do |book|
-      %tr
-      %td= link_to image_tag(book.cover(:thumb), :border => "1"), book_path(book)
-      %td= book.title
-      %td= current_user.books.include?(book) ? link_to("Delete from my list", drop_book_path(book)) : link_to("Add to my list", add_book_path(book))
-      %td= link_to "Edit", edit_book_path(book)
-      %td= link_to 'Delete', book_path(book), :confirm => 'Delete book?', :method => :delete
+      - @books.each do |book|
+        -unless current_user.books.include?(book)
+          %tr{:class => cycle('list_line_odd', 'list_line_even')}
+            %td= link_to image_tag(book.cover(:thumb), :border => "1"), book_path(book)
+            %td= book.title
+            -if user_signed_in?
+              %td.list_actions
+                = current_user.books.include?(book) ? link_to("Delete from my list", drop_book_path(book)) : link_to("Add to my list", add_book_path(book))
+                %br/
+                -if current_user.is_admin?
+                  = link_to "Edit", edit_book_path(book)
+                  %br/
+                  = link_to 'Delete', book_path(book), :confirm => 'Delete book?', :method => :delete
 
 =will_paginate @books

@@ -16,13 +16,20 @@ class BooksController < ApplicationController
 
   def add_book
     Reader.create(:book_id => params[:id], :user_id => current_user.id)
-    redirect_to :back
+    respond_to do |format|
+      format.html {redirect_to :back}
+      #format.js {}
+    end
   end
 
   def drop_book
     @drop_book = Reader.find_by_user_and_book(params[:id], current_user.id).last
-    @drop_book.destroy
-    redirect_to :back
+    respond_to do |format|
+      if @drop_book.destroy
+        format.html {redirect_to :back}
+        #format.js {}
+      end
+    end
   end
 
   def show
