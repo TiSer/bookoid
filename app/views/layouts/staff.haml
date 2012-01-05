@@ -8,6 +8,7 @@
   %body
 
   = render :partial => "shared/login_tab"
+  = render :partial => "shared/to_site" if user_signed_in? && current_user.is_admin
 
 %br
 

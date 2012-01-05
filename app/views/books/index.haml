@@ -21,17 +21,16 @@
       %th
 
       - @books.each do |book|
-        -unless current_user.books.include?(book)
-          %tr{:class => cycle('list_line_odd', 'list_line_even')}
-            %td= link_to image_tag(book.cover(:thumb), :border => "1"), book_path(book)
-            %td= book.title
-            -if user_signed_in?
-              %td.list_actions
-                = current_user.books.include?(book) ? link_to("Delete from my list", drop_book_path(book)) : link_to("Add to my list", add_book_path(book))
+        %tr{:class => cycle('list_line_odd', 'list_line_even')}
+          %td= link_to image_tag(book.cover(:thumb), :border => "1"), book_path(book)
+          %td= book.title
+          -if user_signed_in?
+            %td.list_actions
+              = current_user.books.include?(book) ? link_to("Delete from my list", drop_book_path(book)) : link_to("Add to my list", add_book_path(book))
+              %br/
+              -if current_user.is_admin?
+                = link_to "Edit", edit_book_path(book)
                 %br/
-                -if current_user.is_admin?
-                  = link_to "Edit", edit_book_path(book)
-                  %br/
-                  = link_to 'Delete', book_path(book), :confirm => 'Delete book?', :method => :delete
+                = link_to 'Delete', book_path(book), :confirm => 'Delete book?', :method => :delete
 
 =will_paginate @books

@@ -8,6 +8,7 @@
     = csrf_meta_tags
   %body
     = render :partial => "shared/login_tab"
+    = render :partial => "shared/to_admin" if user_signed_in? && current_user.is_admin
     %br/
     = render :partial => "shared/tab"
     = render :partial => "shared/alerts_notices"
