@@ -28,16 +28,9 @@ group :assets do
   gem 'uglifier'
 end
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
 group :test do
+  gem 'rspec-rails', '2.6.1'
+  gem 'webrat', '0.7.1'
   # Pretty printed test output
   gem 'turn', :require => false
 end
